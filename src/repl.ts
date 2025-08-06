@@ -1,6 +1,5 @@
 import { createInterface } from "node:readline";
-import { CLICommand } from "./commandType.js";
-import { commandExit } from "./command_exit";
+import { getCommands } from "./commands_all.js";
 
 export function cleanInput(input: string): string[] {
     const splitLowercaseTrim = input
@@ -32,26 +31,16 @@ export function  startREPL() {
         const allCommands = getCommands();
 
         if(command in allCommands) {
-            allCommands[command].callback(allCommands)
+            try {
+                allCommands[command].callback(allCommands);
+            } catch (err) {
+                console.log(err);
+            }
         } else {
-            console.log("Unknown command");
+            console.log(`Unknown command: "${command}". Type "help" for a list of commands.`);
         }
-
-        //read boots again and continuer, you are on the right track: the callback method always needs the commands passed in because of the command type
-
 
         rl.prompt()
     });
 }
 
-export function getCommands(): Record<string, CLICommand> {
-    return {
-        exit: {
-            name: "exit",
-            description: "Exits the pokedex",
-            callback: commandExit
-        },
-
-    }
-}
- 
