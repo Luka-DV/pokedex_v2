@@ -10,7 +10,8 @@ export type CLICommand = {
 
 export type State = {
     rl: Interface,
-    commandsRegistry: Record<string, CLICommand>
+    commandsRegistry: Record<string, CLICommand>,
+    pokeAPI: //continue here
 }
 
 export function initState(): State {

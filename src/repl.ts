@@ -10,7 +10,7 @@ export function cleanInput(input: string): string[] {
     return splitLowercaseTrim;
 }
 
-export function  startREPL(state: State) {
+export function startREPL(state: State) {
  /*    const rl = createInterface({
         input: process.stdin,
         output: process.stdout,
@@ -21,7 +21,7 @@ export function  startREPL(state: State) {
 
     rl.prompt();
 
-    rl.on('line', (line) => {
+    rl.on('line', async (line) => {
         const textArray = cleanInput(line);
         const command = textArray[0];
         if(!command) {
@@ -32,7 +32,7 @@ export function  startREPL(state: State) {
 
         if(command in commandsRegistry) {
             try {
-                commandsRegistry[command].callback(state);
+                await commandsRegistry[command].callback(state);
             } catch (err) {
                 console.log(err);
             }
@@ -40,7 +40,8 @@ export function  startREPL(state: State) {
             console.log(`Unknown command: "${command}". Type "help" for a list of commands.`);
         }
 
-        rl.prompt()
+        console.log();
+        rl.prompt();
     });
 }
 
