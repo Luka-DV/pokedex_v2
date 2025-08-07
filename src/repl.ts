@@ -1,5 +1,5 @@
-import { createInterface } from "node:readline";
-import { getCommands } from "./commands_all.js";
+
+import { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
     const splitLowercaseTrim = input
@@ -10,12 +10,14 @@ export function cleanInput(input: string): string[] {
     return splitLowercaseTrim;
 }
 
-export function  startREPL() {
-    const rl = createInterface({
+export function  startREPL(state: State) {
+ /*    const rl = createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: "Pokedex >"
-    });
+    }); */
+
+    const {rl, commandsRegistry } = state;
 
     rl.prompt();
 
@@ -28,11 +30,9 @@ export function  startREPL() {
         }
         //console.log(`Your command was: ${command[0]}`);
 
-        const allCommands = getCommands();
-
-        if(command in allCommands) {
+        if(command in commandsRegistry) {
             try {
-                allCommands[command].callback(allCommands);
+                commandsRegistry[command].callback(state);
             } catch (err) {
                 console.log(err);
             }
