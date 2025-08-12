@@ -21,21 +21,21 @@ export class Cache {
     }
 
     get<T>(key: string) {
-        return this.cache.get(key);
+        return this.cache.get(key)?.val;
     }
 
     private reap() { 
         for(let [key, entry] of this.cache) {
             const { createdAt } = entry;
-            if(createdAt > Date.now() - this.interval) {
+            if(createdAt < Date.now() - this.interval) {
                 this.cache.delete(key);
             }
         }
     }
 
     private startReapLoop() {
-        this.reapIntervalId = setInterval(this.reap, this.interval);
-
+        this.reapIntervalId = setInterval(this.reap.bind(this), this.interval);
+        //fix issue
     }
 
     stopReapLoop() {

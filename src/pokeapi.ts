@@ -1,10 +1,10 @@
-import { b } from "vitest/dist/chunks/suite.d.FvehnV49";
+
 import { Cache } from "./pokecache.js";
 
 export class PokeAPI {
     private static readonly baseURL = "https://pokeapi.co/api/v2/";
 
-    private cache = new Cache(5000) 
+    private cache = new Cache(50000) 
 
     constructor() {
 
@@ -19,8 +19,8 @@ export class PokeAPI {
         const cachedData = this.cache.get(url)
 
         if(cachedData) {
-          const data = cachedData.val;
-          return data;
+          console.log("CACHE used");
+          return cachedData;
         }
 
         const response = await fetch(url);
