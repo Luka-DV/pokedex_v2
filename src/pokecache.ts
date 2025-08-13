@@ -17,17 +17,21 @@ export class Cache {
     }
 
     add<T>(key: string, val: T) {
-        this.cache.set(key, {createdAt: Date.now(), val: val})
+        const entry: CacheEntry<T> = {
+            createdAt: Date.now(),
+            val: val
+        }
+        this.cache.set(key, entry);
     }
 
-    get<T>(key: string) {
+    get<T>(key: string): T | undefined {
         return this.cache.get(key)?.val;
     }
 
     private reap() { 
         for(let [key, entry] of this.cache) {
             const { createdAt } = entry;
-            if(createdAt < Date.now() - this.interval) {
+            if(Date.now() - createdAt > this.interval) {
                 this.cache.delete(key);
             }
         }
@@ -35,7 +39,6 @@ export class Cache {
 
     private startReapLoop() {
         this.reapIntervalId = setInterval(this.reap.bind(this), this.interval);
-        //fix issue
     }
 
     stopReapLoop() {

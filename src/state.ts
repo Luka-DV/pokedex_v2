@@ -6,6 +6,7 @@ export type CLICommand = {
     name: string;
     description: string;
     callback: (state: State) => Promise<void>;
+    
     //callback: (commands: Record<string, CLICommand>) => void;
 };
 
@@ -17,7 +18,7 @@ export type State = {
     prevLocationsURL: string | null
 }
 
-export function initState(): State {
+export function initState(cacheDuration: number): State {
     return {
         rl: createInterface({
             input: process.stdin,
@@ -25,7 +26,7 @@ export function initState(): State {
             prompt: "Pokedex >"
             }),
         commandsRegistry: getCommands(),
-        pokeAPI: new PokeAPI(),
+        pokeAPI: new PokeAPI(cacheDuration),
         nextLocationsURL: null,
         prevLocationsURL: null
     }
