@@ -32,7 +32,7 @@ export function startREPL(state: State) {
 
         if(command in commandsRegistry) {
             try {
-                await commandsRegistry[command].callback(state);
+                await commandsRegistry[command].callback(state, textArray[1]);
             } catch (err) {
                 console.log(err);
             }

@@ -39,7 +39,7 @@ export class PokeAPI {
     }
 
     async fetchLocation(locationNameOrId: string | number): Promise<LocationRoot> {
-      const resURL = `${PokeAPI.baseURL}/location-area/${locationNameOrId}/` //fix thsi - diff url than in the off solution!
+      const resURL = `${PokeAPI.baseURL}/location-area/${locationNameOrId}/`;
       const cachedData = this.cache.get<LocationRoot>(resURL)
 
       if(cachedData) {
@@ -60,7 +60,7 @@ export class PokeAPI {
         return data;
 
       } catch (err) {
-          throw new Error(`Error fetching locations: ${(err as Error).message}`);
+          throw new Error(`Error fetching location: ${(err as Error).message}`);
       }
 
     }
