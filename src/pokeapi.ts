@@ -1,5 +1,4 @@
 
-import { chai } from "vitest";
 import { Cache } from "./pokecache.js";
 
 export class PokeAPI {
@@ -39,10 +38,9 @@ export class PokeAPI {
       }
     }
 
-    async fetchLocation(locationName: string): Promise<Location> {
-      const resURL = `${PokeAPI.baseURL}/location/${locationName}/`
-
-      const cachedData = this.cache.get<Location>(resURL)
+    async fetchLocation(locationNameOrId: string | number): Promise<LocationRoot> {
+      const resURL = `${PokeAPI.baseURL}/location-area/${locationNameOrId}/` //fix thsi - diff url than in the off solution!
+      const cachedData = this.cache.get<LocationRoot>(resURL)
 
       if(cachedData) {
         console.log("CACHE used");
@@ -57,7 +55,7 @@ export class PokeAPI {
         
         const data = await res.json();
 
-        this.cache.add<Location>(resURL, data);
+        this.cache.add<LocationRoot>(resURL, data);
 
         return data;
 
@@ -72,6 +70,7 @@ export class PokeAPI {
     }
 }
 
+//batch of locations
 export type ShallowLocations = {
   count: number
   next: string
@@ -85,27 +84,38 @@ export type Result = {
 }
 
 
-
-export interface Location {
-  areas: Area[]
-  game_indices: Index[]
+//single location
+export interface LocationRoot {
+  encounter_method_rates: EncounterMethodRate[]
+  game_index: number
   id: number
+  location: Location
   name: string
   names: Name[]
-  region: Region
+  pokemon_encounters: PokemonEncounter[]
 }
 
-export interface Area {
+export interface EncounterMethodRate {
+  encounter_method: EncounterMethod
+  version_details: VersionDetail[]
+}
+
+export interface EncounterMethod {
   name: string
   url: string
 }
 
-export interface Index {
-  game_index: number
-  generation: Generation
+export interface VersionDetail {
+  rate: number
+  version: Version
 }
 
-export interface Generation {
+export interface Version {
+  name: string
+  url: string
+}
+
+export interface Location {
   name: string
   url: string
 }
@@ -120,7 +130,36 @@ export interface Language {
   url: string
 }
 
-export interface Region {
+export interface PokemonEncounter {
+  pokemon: Pokemon
+  version_details: VersionDetail2[]
+}
+
+export interface Pokemon {
+  name: string
+  url: string
+}
+
+export interface VersionDetail2 {
+  encounter_details: EncounterDetail[]
+  max_chance: number
+  version: Version2
+}
+
+export interface EncounterDetail {
+  chance: number
+  condition_values: any[]
+  max_level: number
+  method: Method
+  min_level: number
+}
+
+export interface Method {
+  name: string
+  url: string
+}
+
+export interface Version2 {
   name: string
   url: string
 }
