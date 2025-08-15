@@ -3,7 +3,7 @@ import { State } from "./state.js"
 export async function commandMapB(state: State) {
     //const url = "https://pokeapi.co/api/v2/location-area"
     const { pokeAPI } = state; 
-    let pageURL = "location-area/";
+    let pageURL = "/location-area/";
 
     if(state.prevLocationsURL) {
         const prevLoc = state.prevLocationsURL.split("/").at(-1); 
