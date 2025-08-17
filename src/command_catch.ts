@@ -32,19 +32,17 @@ export async function commandCatch(state: State, pokemon: string) {
 }
 
 
-function calcuateIfPokemonWasCaught(data: Pokemon) {
+function calcuateIfPokemonWasCaught(pokemonData: Pokemon) {
 
-    const basePokemonExp = data.base_experience;
+    const basePokemonExp = pokemonData.base_experience;
     const difficultyOfCatching = basePokemonExp/1000 + 0.30;
 
     const randomValue = Math.random();
 
-    let caught = false;
-
     if(randomValue > difficultyOfCatching) {
-        caught = true;
+        return true;
     }
 
-    return caught;
+    return false;
 
 }
