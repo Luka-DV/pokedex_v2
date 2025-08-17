@@ -3,9 +3,7 @@ import { Pokemon } from "./pokeapi.js";
 import { State } from "./state.js";
 
 export async function commandCatch(state: State, pokemon: string) {
-
     const { pokeAPI } = state;
-
     try{
         const pokemonData = await pokeAPI.fetchPokemonData(pokemon);
         
@@ -28,12 +26,10 @@ export async function commandCatch(state: State, pokemon: string) {
     } catch(err) {
         console.log(`Sorry, the pokemon "${pokemon}" was not found`);
     }
-
 }
 
 
 function calcuateIfPokemonWasCaught(pokemonData: Pokemon) {
-
     const basePokemonExp = pokemonData.base_experience;
     const difficultyOfCatching = basePokemonExp/1000 + 0.30;
 
@@ -44,5 +40,4 @@ function calcuateIfPokemonWasCaught(pokemonData: Pokemon) {
     }
 
     return false;
-
 }
