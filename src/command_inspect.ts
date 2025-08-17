@@ -10,6 +10,7 @@ export async function commandInspect(state: State, pokemon: string) {
         return;
     }
 
+    console.log();
     console.log(`Name: ${pokemonData.name}`);
     console.log(`Height: ${pokemonData.height}`);
     console.log(`Weight: ${pokemonData.weight}`); 
