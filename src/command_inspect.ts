@@ -15,10 +15,12 @@ export async function commandInspect(state: State, pokemon: string) {
         return;
     }
 
+    const pokemonHeightInMeters = pokemonData.height / 10;
+
     console.log();
     console.log(`Name: ${pokemonData.name}`);
-    console.log(`Height: ${pokemonData.height}`);
-    console.log(`Weight: ${pokemonData.weight}`); 
+    console.log(`Height: ${pokemonHeightInMeters >= 1 ? pokemonHeightInMeters + " m" : (pokemonHeightInMeters * 100) + " cm"}`);
+    console.log(`Weight: ${pokemonData.weight / 10} kg`); 
     console.log(`Stats:`);
     pokemonData.stats.forEach(stat => console.log(` -${stat.stat.name}: ${stat.base_stat}`));
     console.log("Types:");
