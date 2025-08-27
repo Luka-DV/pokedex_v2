@@ -1,22 +1,24 @@
 # Pokemon REPL
 
-A command-line interface for exploring Pokemon locations using the PokeAPI, built with Node.js and TypeScript.
+A command-line interface for exploring Pokemon locations using the [PokeAPI](https://pokeapi.co/docs/v2), built with Node.js and TypeScript, with the help of instructions at [boot.dev](https://www.boot.dev/courses/build-pokedex-cli-typescript).
 
 ## Features
 
-- **Interactive REPL**: Navigate through Pokemon locations with simple commands
+- **Interactive REPL**: Navigate through Pokemon locations with simple commands in your terminal
 - **Intelligent Caching**: Responses are cached to improve performance and reduce API calls
 - **Location Exploration**: Browse through different Pokemon location areas
-- **Pokemon Discovery**: Find Pokemon in specific locations
+- **Pokemon Discovery & Capture**: Find Pokemon in specific locations
 
 ## Commands
 
-- `help` - Display available commands
-- `exit` - Exit the application
-- `map` - Show next 20 locations
-- `mapb` - Show previous 20 locations
-- `explore <location-name or id>` - Explore a specific location to find Pokemon
-- `catch <pokemon-name>` - Attempt to catch a Pokemon
+- `help` : Display available commands
+- `exit` : Exit the application
+- `map` : Show next 20 locations
+- `mapb` : Show previous 20 locations
+- `explore <location-name or id>` : Explore a specific location to find Pokemon
+- `catch <pokemon-name>` : Attempt to catch a Pokemon
+- `inspect <pokemon-name>` : Display information about a previously caught Pokémon
+- `pokedex`: Show the names of the Pokemon you have caught
 
 ## Installation
 
@@ -39,7 +41,7 @@ A command-line interface for exploring Pokemon locations using the PokeAPI, buil
 - Language: TypeScript
 - Runtime: Node.js
 - API: [pokeapi](https://pokeapi.co/docs/v2)
-- Caching: Custom cache implementation with configurable TTL
+- Caching: Custom cache implementation with configurable Time-To-Live (TTL)
 - Architecture: Modular design with separate classes for API handling, caching, and state management
 
 ## Project Structure
