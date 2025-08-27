@@ -20,13 +20,19 @@ A command-line interface for exploring Pokemon locations using the PokeAPI, buil
 
 ## Installation
 
-1. Clone the repository
-2. Install dependencies:
+1.  Clone the repository
+2.  Install dependencies:
+    ```bash
     npm install
-3. Build the project:
+    ```
+3.  Build the project:
+    ```bash
     npm run build
-4. Run the application:
+    ```
+4.  Run the application:
+    ```bash
     npm start
+    ```
 
 ## Technical Details
 
@@ -38,13 +44,14 @@ A command-line interface for exploring Pokemon locations using the PokeAPI, buil
 
 ## Project Structure
 
-    pokeapi.ts - API service layer with built-in cache
-    pokecache.ts - Cache implementation
-    state.ts - Application state management
-    commands/ - Individual command implementations
+- pokeapi.ts - API service layer with built-in cache
+- pokecache.ts - Cache implementation
+- state.ts - Application state management
+- commands/ - Individual command implementations
 
 ## Example Usage
 
+```text
 Pokedex >map
 1 canalave-city-area
 2 eterna-city-area
@@ -71,5 +78,4 @@ Height: 30 cm
 Weight: 2.9 kg
 Stats:
 ...
-
-
+```
