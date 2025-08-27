@@ -13,6 +13,8 @@ export async function commandMap(state: State) {
         } else {
             throw new Error("incorrect value at next Locaton URL")
         }
+    } else {
+        pageURL += "?offset=0&limit=20";
     }
 
     try {    
