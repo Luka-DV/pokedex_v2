@@ -3,6 +3,11 @@ import { State } from "./state.js";
 
 export async function commandInspect(state: State, pokemon: string) {
 
+    if(pokemon === undefined) {
+        console.log("Please enter a pokemon name to inspect a pokemon");
+        return;
+    }
+
     const pokemonData = state.pokedex?.[pokemon];
 
     if(!pokemonData) {
